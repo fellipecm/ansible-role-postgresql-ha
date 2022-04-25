@@ -2,23 +2,44 @@
 all:
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    ansible_user: 'vagrant'
     postgresql_version: 12
     repmgr_version: 5.2
     repmgr_master: pgsql01
 pgcluster:
   hosts:
+    # Fake DC 1
     pgsql01:
-      ansible_host: 192.168.56.10  
+      ansible_host: 192.168.1.171
+      ansible_ssh_private_key_file: '/home/fellipecm/code/github/forks/ansible-role-postgresql-ha/.vagrant/machines/pgsql01/virtualbox/private_key'
       repmgr_node_id: 1 
-      repmgr_priority: 3
-    pgsql02:   
-      ansible_host: 192.168.56.11
-      repmgr_node_id: 2
-      repmgr_priority: 2
-    pgsql03:     
-      ansible_host: 192.168.56.12
-      repmgr_node_id: 3
       repmgr_priority: 1
+    pgsql02:   
+      ansible_host: 192.168.1.172
+      ansible_ssh_private_key_file: '/home/fellipecm/code/github/forks/ansible-role-postgresql-ha/.vagrant/machines/pgsql02/virtualbox/private_key'
+      repmgr_node_id: 2
+      repmgr_priority: 3
+    # Fake DC 2
+    pgsql03:     
+      ansible_host: 192.168.1.173
+      ansible_ssh_private_key_file: '/home/fellipecm/code/github/forks/ansible-role-postgresql-ha/.vagrant/machines/pgsql03/virtualbox/private_key'
+      repmgr_node_id: 3
+      repmgr_priority: 2
+    pgsql04:     
+      ansible_host: 192.168.1.174
+      ansible_ssh_private_key_file: '/home/fellipecm/code/github/forks/ansible-role-postgresql-ha/.vagrant/machines/pgsql04/virtualbox/private_key'
+      repmgr_node_id: 4
+      repmgr_priority: 4
+    # pgsql05:     
+    #   ansible_host: 192.168.1.175
+    #   ansible_ssh_private_key_file: '/home/fellipecm/code/github/forks/ansible-role-postgresql-ha/.vagrant/machines/pgsql05/virtualbox/private_key'
+    #   repmgr_node_id: 5
+    #   repmgr_priority: 2
+    # pgsql06:     
+    #   ansible_host: 192.168.1.176
+    #   ansible_ssh_private_key_file: '/home/fellipecm/code/github/forks/ansible-role-postgresql-ha/.vagrant/machines/pgsql06/virtualbox/private_key'
+    #   repmgr_node_id: 6
+    #   repmgr_priority: 1
   vars:
     # Required configuration items
     repmgr_target_group: pgcluster

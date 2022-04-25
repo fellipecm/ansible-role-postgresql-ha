@@ -1,4 +1,8 @@
 ---
+- name: Set timezone to Australia/Sydney
+  community.general.timezone:
+    name: Australia/Sydney
+
 - name: PostgreSQL | Make sure the postgres data directory exists
   file:
     path: "{{ postgresql_data_directory }}"
